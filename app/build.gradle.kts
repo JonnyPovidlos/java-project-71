@@ -1,6 +1,7 @@
 plugins {
     id("java")
     id("com.github.ben-manes.versions") version "0.52.0"
+    id("org.sonarqube") version "6.0.1.5171"
     application
 }
 
@@ -24,4 +25,12 @@ tasks.test {
 
 application {
     mainClass = "hexlet.code.App"
+}
+
+sonar {
+    properties {
+        property("sonar.projectKey", "JonnyPovidlos_java-project-71")
+        property("sonar.organization", "jonnypovidlos")
+        property("sonar.host.url", "https://sonarcloud.io")
+    }
 }
