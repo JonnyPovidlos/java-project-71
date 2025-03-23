@@ -1,5 +1,6 @@
 package hexlet.code;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
@@ -13,15 +14,15 @@ import java.util.Map;
 
 import java.util.concurrent.Callable;
 
-@Command(name="gendiff", mixinStandardHelpOptions = true, version = "gendiff v0.1.0",
+@Command(name = "gendiff", mixinStandardHelpOptions = true, version = "gendiff v0.1.0",
         description = "Compares two configuration files and shows a difference.")
 public class App implements Callable<Integer> {
     @Override
     public Integer call() throws Exception {
         var mapFile1 = jsonToMap(readFile(filepath1));
         var mapFile2 = jsonToMap(readFile(filepath2));
-        System.out.println(mapFile1);
-        System.out.println(mapFile2);
+        var result = Differ.generate(mapFile1, mapFile2);
+        System.out.println(result);
         return 0;
     }
 
@@ -43,9 +44,9 @@ public class App implements Callable<Integer> {
         return Files.readString(path).trim();
     }
 
-    private static Map jsonToMap (String json) throws Exception {
+    private static Map<String, Object> jsonToMap(String json) throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.readValue(json, Map.class);
+        return objectMapper.readValue(json, new TypeReference<>() { });
     }
 
     public static void main(String[] args) {
