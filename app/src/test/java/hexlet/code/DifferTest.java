@@ -14,6 +14,7 @@ public class DifferTest {
 
     public static String expectedValStylish;
     public static String expectedValPlain;
+    public static String expectedValJson;
     public static Map<String, Object> file1;
     public static Map<String, Object> file2;
 
@@ -26,6 +27,7 @@ public class DifferTest {
     public static void beforeAll() throws Exception {
         expectedValStylish = readFixture("result-stylish");
         expectedValPlain = readFixture("result-plain");
+        expectedValJson = readFixture("result-json");
     }
 
     @Test
@@ -39,6 +41,9 @@ public class DifferTest {
 
         actual = Differ.generate(file1, file2, "plain");
         assertEquals(expectedValPlain, actual);
+
+        actual = Differ.generate(file1, file2, "json");
+        assertEquals(expectedValJson, actual);
     }
 
     @Test
@@ -52,6 +57,9 @@ public class DifferTest {
 
         actual = Differ.generate(file1, file2, "plain");
         assertEquals(expectedValPlain, actual);
+
+        actual = Differ.generate(file1, file2, "json");
+        assertEquals(expectedValJson, actual);
     }
 
     @Test
