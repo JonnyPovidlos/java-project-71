@@ -23,12 +23,24 @@ public class DifferTest {
     @BeforeAll
     public static void beforeAll() throws Exception {
         expectedVal = readFixture("test1-json");
-        file1 = FileUtils.jsonToMap(readFixture("file1.json"));
-        file2 = FileUtils.jsonToMap(readFixture("file2.json"));
     }
 
     @Test
-    public void testGenerateFromJson() {
+    public void testGenerateFromJson() throws Exception {
+
+        file1 = Parser.parse(readFixture("file1.json"), ".json");
+        file2 = Parser.parse(readFixture("file2.json"), ".json");
+
+        var actual = Differ.generate(file1, file2);
+
+        assertEquals(expectedVal, actual);
+    }
+
+    @Test
+    public void testGenerateFromYml() throws Exception {
+
+        file1 = Parser.parse(readFixture("file1.yml"), ".yml");
+        file2 = Parser.parse(readFixture("file2.yml"), ".yml");
 
         var actual = Differ.generate(file1, file2);
 
