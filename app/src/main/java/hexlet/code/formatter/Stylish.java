@@ -11,9 +11,9 @@ public class Stylish {
             var typeOp = (String) entry.get("type");
             var field = (String) entry.get("field");
             switch (typeOp) {
-                case "add" -> result.append(String.format("\n%s+ %s: %s", " ".repeat(2), field, entry.get("value")));
-                case "remove" -> result.append(String.format("\n%s- %s: %s", " ".repeat(2), field, entry.get("value")));
-                case "change" -> result.append(String.format("\n%s- %s: %s\n  + %s: %s", " ".repeat(2),
+                case "added" -> result.append(String.format("\n%s+ %s: %s", " ".repeat(2), field, entry.get("value")));
+                case "removed" -> result.append(String.format("\n%s- %s: %s", " ".repeat(2), field, entry.get("value")));
+                case "updated" -> result.append(String.format("\n%s- %s: %s\n  + %s: %s", " ".repeat(2),
                         field, entry.get("oldValue"), field, entry.get("newValue")));
                 case "stable" -> result.append(String.format("\n%s%s: %s", " ".repeat(4), field, entry.get("value")));
                 default -> { }

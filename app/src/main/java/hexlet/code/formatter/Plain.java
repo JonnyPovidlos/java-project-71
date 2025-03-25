@@ -10,11 +10,11 @@ public class Plain {
             var typeOp = (String) entry.get("type");
             var field = (String) entry.get("field");
             switch (typeOp) {
-                case "add" -> result.append(String.format("Property '%s' was added with value: %s\n",
-                        field, getValue(entry.get("value"))));
-                case "remove" -> result.append(String.format("Property '%s' was removed\n", field));
-                case "change" -> result.append(String.format("Property '%s' was updated. From %s to %s\n",
-                        field, getValue(entry.get("oldValue")), getValue(entry.get("newValue"))));
+                case "added" -> result.append(String.format("Property '%s' was %s with value: %s\n",
+                        field, typeOp, getValue(entry.get("value"))));
+                case "removed" -> result.append(String.format("Property '%s' was %s\n", field, typeOp));
+                case "updated" -> result.append(String.format("Property '%s' was %s. From %s to %s\n",
+                        field, typeOp, getValue(entry.get("oldValue")), getValue(entry.get("newValue"))));
                 default -> { }
             }
         }

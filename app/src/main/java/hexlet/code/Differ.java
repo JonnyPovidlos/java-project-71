@@ -23,13 +23,13 @@ public class Differ {
             item.put("field", key);
 
             if (!struct1.containsKey(key)) {
-                item.put("type", "add");
+                item.put("type", "added");
                 item.put("value", struct2.get(key));
             } else if (!struct2.containsKey(key)) {
-                item.put("type", "remove");
+                item.put("type", "removed");
                 item.put("value", struct1.get(key));
             } else if (!Objects.equals(struct1.get(key), struct2.get(key))) {
-                item.put("type", "change");
+                item.put("type", "updated");
                 item.put("oldValue", struct1.get(key));
                 item.put("newValue", struct2.get(key));
             } else {
