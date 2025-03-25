@@ -12,7 +12,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class DifferTest {
 
-    public static String expectedVal;
+    public static String expectedValStylish;
+    public static String expectedValPlain;
     public static Map<String, Object> file1;
     public static Map<String, Object> file2;
 
@@ -23,7 +24,8 @@ public class DifferTest {
 
     @BeforeAll
     public static void beforeAll() throws Exception {
-        expectedVal = readFixture("result-stylish");
+        expectedValStylish = readFixture("result-stylish");
+        expectedValPlain = readFixture("result-plain");
     }
 
     @Test
@@ -33,8 +35,10 @@ public class DifferTest {
         file2 = Parser.parse(readFixture("file2.json"), ".json");
 
         var actual = Differ.generate(file1, file2);
+        assertEquals(expectedValStylish, actual);
 
-        assertEquals(expectedVal, actual);
+        actual = Differ.generate(file1, file2, "plain");
+        assertEquals(expectedValPlain, actual);
     }
 
     @Test
@@ -44,8 +48,10 @@ public class DifferTest {
         file2 = Parser.parse(readFixture("file2.yml"), ".yml");
 
         var actual = Differ.generate(file1, file2);
+        assertEquals(expectedValStylish, actual);
 
-        assertEquals(expectedVal, actual);
+        actual = Differ.generate(file1, file2, "plain");
+        assertEquals(expectedValPlain, actual);
     }
 
     @Test
