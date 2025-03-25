@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class DifferTest {
 
@@ -45,6 +46,15 @@ public class DifferTest {
         var actual = Differ.generate(file1, file2);
 
         assertEquals(expectedVal, actual);
+    }
+
+    @Test
+    public void testInvalidFormat() throws Exception {
+
+        var exception = assertThrows(IllegalArgumentException.class, () -> Parser.parse("", ".ini"));
+
+        assertEquals("Invalid format file", exception.getMessage());
+
     }
 
 
