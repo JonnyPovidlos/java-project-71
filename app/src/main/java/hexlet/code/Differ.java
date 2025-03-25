@@ -2,6 +2,7 @@ package hexlet.code;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 public class Differ {
@@ -19,12 +20,12 @@ public class Differ {
             } else if (!struct2.containsKey(key)) {
                 result.append(String.format("\n  - %s: %s", key, struct1.get(key)));
 
-            } else if (!struct1.get(key).equals(struct2.get(key))) {
+            } else if (!Objects.equals(struct1.get(key), struct2.get(key))) {
                 result.append(String.format("\n  - %s: %s", key, struct1.get(key)));
                 result.append(String.format("\n  + %s: %s", key, struct2.get(key)));
 
             } else {
-                result.append(String.format("\n  %s: %s", key, struct1.get(key)));
+                result.append(String.format("\n    %s: %s", key, struct1.get(key).toString()));
             }
         }
         result.append("\n}");
