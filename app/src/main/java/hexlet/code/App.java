@@ -17,12 +17,13 @@ public class App implements Callable<Integer> {
         var fileExtension2 = filepath2.substring(filepath1.lastIndexOf("."));
         var mapFile1 = Parser.parse(FileUtils.readFile(filepath1), fileExtension1);
         var mapFile2 = Parser.parse(FileUtils.readFile(filepath2), fileExtension2);
-        var result = Differ.generate(mapFile1, mapFile2);
+        var result = Differ.generate(mapFile1, mapFile2, format);
         System.out.println(result);
         return 0;
     }
 
-    @Option(names = {"-f", "--format"}, paramLabel = "format", description = "output format [default: stylish]")
+    @Option(names = {"-f", "--format"}, paramLabel = "format", defaultValue = "stylish",
+            description = "output format [default: ${DEFAULT-VALUE}]")
     String format;
 
     @Parameters(index = "0", description = "path to first file", paramLabel = "filepath1")
