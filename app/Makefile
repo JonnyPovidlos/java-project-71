@@ -1,4 +1,4 @@
-RESOURCES=./src/test/resources
+RESOURCES=./src/test/resources/fixtures
 
 run-dist:
-	./build/install/app/bin/app $(RESOURCES)/json/file1.json $(RESOURCES)/json/file2.json
+	./build/install/app/bin/app $(RESOURCES)/file1.json $(RESOURCES)/file2.json

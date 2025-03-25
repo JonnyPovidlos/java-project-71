@@ -1,16 +1,10 @@
 package hexlet.code;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Map;
 
 import java.util.concurrent.Callable;
 
@@ -19,8 +13,8 @@ import java.util.concurrent.Callable;
 public class App implements Callable<Integer> {
     @Override
     public Integer call() throws Exception {
-        var mapFile1 = jsonToMap(readFile(filepath1));
-        var mapFile2 = jsonToMap(readFile(filepath2));
+        var mapFile1 = FileUtils.jsonToMap(FileUtils.readFile(filepath1));
+        var mapFile2 = FileUtils.jsonToMap(FileUtils.readFile(filepath2));
         var result = Differ.generate(mapFile1, mapFile2);
         System.out.println(result);
         return 0;
@@ -35,19 +29,8 @@ public class App implements Callable<Integer> {
     @Parameters(index = "1", description = "path to second file", paramLabel = "filepath2")
     String filepath2;
 
-    private static Path getPath(String fileName) {
-        return Paths.get(fileName).toAbsolutePath().normalize();
-    }
 
-    private static String readFile(String fileName) throws Exception {
-        var path = getPath(fileName);
-        return Files.readString(path).trim();
-    }
 
-    private static Map<String, Object> jsonToMap(String json) throws Exception {
-        ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.readValue(json, new TypeReference<>() { });
-    }
 
     public static void main(String[] args) {
         var exitCode = new CommandLine(new App()).execute(args);
