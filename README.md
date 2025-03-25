@@ -3,3 +3,5 @@
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=JonnyPovidlos_java-project-71&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=JonnyPovidlos_java-project-71)
 [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=JonnyPovidlos_java-project-71&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=JonnyPovidlos_java-project-71)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=JonnyPovidlos_java-project-71&metric=coverage)](https://sonarcloud.io/summary/new_code?id=JonnyPovidlos_java-project-71)
+
+[![asciicast](https://asciinema.org/a/ZcZ63v56IBb0w8pFtSShwAnVI.svg)](https://asciinema.org/a/ZcZ63v56IBb0w8pFtSShwAnVI)
