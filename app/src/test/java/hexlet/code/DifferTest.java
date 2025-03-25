@@ -23,7 +23,7 @@ public class DifferTest {
 
     @BeforeAll
     public static void beforeAll() throws Exception {
-        expectedVal = readFixture("test1-stylish");
+        expectedVal = readFixture("result-stylish");
     }
 
     @Test

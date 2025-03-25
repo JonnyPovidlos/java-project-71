@@ -1,7 +1,5 @@
 package hexlet.code;
 
-import hexlet.code.formater.Formater;
-
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
@@ -41,7 +39,7 @@ public class Differ {
 
             diff.add(item);
         }
-        return Formater.format(diff, format);
+        return Formatter.format(diff, format);
     }
 
     public static String generate(Map<String, Object> struct1, Map<String, Object> struct2) {

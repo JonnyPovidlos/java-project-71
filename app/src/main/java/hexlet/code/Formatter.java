@@ -1,9 +1,11 @@
-package hexlet.code.formater;
+package hexlet.code;
+
+import hexlet.code.formatter.Stylish;
 
 import java.util.List;
 import java.util.Map;
 
-public class Formater {
+public class Formatter {
     public static String format(List<Map<String, Object>> diff, String format) {
         return switch (format) {
             case "stylish" -> Stylish.format(diff);
