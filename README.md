@@ -9,3 +9,6 @@
 
 ### Yml
 [![asciicast](https://asciinema.org/a/bmG1NxhCSBNMGQqwlslmnlaZi.svg)](https://asciinema.org/a/bmG1NxhCSBNMGQqwlslmnlaZi)
+
+### Plain format
+[![asciicast](https://asciinema.org/a/PtAqq5XndCLJm0ux2xIZ5QoUk.svg)](https://asciinema.org/a/PtAqq5XndCLJm0ux2xIZ5QoUk)
