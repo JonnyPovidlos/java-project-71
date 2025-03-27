@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Stylish {
-    private final static int spaceNumber = 4;
+    private static final int SPACE_NUMBER = 4;
 
     public static String format(List<Map<String, Object>> diff) {
         var result = new StringBuilder("{");
@@ -22,7 +22,7 @@ public class Stylish {
                         String.format("\n%s- %s: %s\n  + %s: %s", " ".repeat(2),
                                 field, entry.get("oldValue"), field, entry.get("newValue")));
                 case "stable" -> result.append(
-                        String.format("\n%s%s: %s", " ".repeat(spaceNumber), field, entry.get("value")));
+                        String.format("\n%s%s: %s", " ".repeat(SPACE_NUMBER), field, entry.get("value")));
                 default -> { }
             }
         }
