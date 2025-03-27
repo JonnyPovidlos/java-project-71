@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Stylish {
+    private final static int spaceNumber = 4;
 
     public static String format(List<Map<String, Object>> diff) {
         var result = new StringBuilder("{");
@@ -11,7 +12,7 @@ public class Stylish {
         for (var entry : diff) {
             var typeOp = (String) entry.get("type");
             var field = (String) entry.get("field");
-            int spaceNumber = 4;
+
             switch (typeOp) {
                 case "added" -> result.append(
                         String.format("\n%s+ %s: %s", " ".repeat(2), field, entry.get("value")));
