@@ -10,11 +10,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class DifferTest {
 
-    public static String expectedValStylish;
-    public static String expectedValPlain;
-    public static String expectedValJson;
-    public static String file1;
-    public static String file2;
+    private static String expectedValStylish;
+    private static String expectedValPlain;
+    private static String expectedValJson;
+    private static String file1;
+    private static String file2;
 
     private static String readFixture(String fileName) throws Exception {
         return FileUtils.readFile(getFixturePath(fileName));
