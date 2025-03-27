@@ -1,7 +1,5 @@
 package hexlet.code;
 
-import java.util.Map;
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -15,12 +13,15 @@ public class DifferTest {
     public static String expectedValStylish;
     public static String expectedValPlain;
     public static String expectedValJson;
-    public static Map<String, Object> file1;
-    public static Map<String, Object> file2;
+    public static String file1;
+    public static String file2;
 
     private static String readFixture(String fileName) throws Exception {
-        var path = Paths.get("src", "test", "resources", "fixtures", fileName).toAbsolutePath().normalize();
-        return FileUtils.readFile(path.toString());
+        return FileUtils.readFile(getFixturePath(fileName));
+    }
+
+    private static String getFixturePath(String fileName) {
+        return Paths.get("src", "test", "resources", "fixtures", fileName).toAbsolutePath().normalize().toString();
     }
 
     @BeforeAll
@@ -33,8 +34,8 @@ public class DifferTest {
     @Test
     public void testGenerateFromJson() throws Exception {
 
-        file1 = Parser.parse(readFixture("file1.json"), ".json");
-        file2 = Parser.parse(readFixture("file2.json"), ".json");
+        file1 = getFixturePath("file1.json");
+        file2 = getFixturePath("file2.json");
 
         var actual = Differ.generate(file1, file2);
         assertEquals(expectedValStylish, actual);
@@ -49,8 +50,8 @@ public class DifferTest {
     @Test
     public void testGenerateFromYml() throws Exception {
 
-        file1 = Parser.parse(readFixture("file1.yml"), ".yml");
-        file2 = Parser.parse(readFixture("file2.yml"), ".yml");
+        file1 = getFixturePath("file1.yml");
+        file2 = getFixturePath("file2.yml");
 
         var actual = Differ.generate(file1, file2);
         assertEquals(expectedValStylish, actual);
@@ -63,7 +64,7 @@ public class DifferTest {
     }
 
     @Test
-    public void testInvalidFormat() throws Exception {
+    public void testInvalidFormat() {
 
         var exception = assertThrows(IllegalArgumentException.class, () -> Parser.parse("", ".ini"));
 

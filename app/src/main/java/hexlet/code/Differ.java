@@ -8,9 +8,22 @@ import java.util.Objects;
 import java.util.stream.Stream;
 
 public class Differ {
-    public static String generate(Map<String, Object> struct1, Map<String, Object> struct2, String format) {
+    public static String generate(String file1, String file2, String format) throws Exception {
+        var fileExtension1 = file1.substring(file1.lastIndexOf("."));
+        var fileExtension2 = file2.substring(file2.lastIndexOf("."));
+        var mapFile1 = Parser.parse(FileUtils.readFile(file1), fileExtension1);
+        var mapFile2 = Parser.parse(FileUtils.readFile(file2), fileExtension2);
 
-        List<String> sortedKeys = Stream.concat(struct1.keySet().stream(), struct2.keySet().stream())
+        var diff = compuite(mapFile1, mapFile2);
+        return Formatter.format(diff, format);
+    }
+
+    public static String generate(String file1, String file2) throws Exception {
+        return generate(file1, file2, "stylish");
+    }
+
+    private static List<Map<String, Object>> compuite(Map<String, Object> mapFile1, Map<String, Object> mapFile2) {
+        List<String> sortedKeys = Stream.concat(mapFile1.keySet().stream(), mapFile2.keySet().stream())
                 .distinct()
                 .sorted()
                 .toList();
@@ -22,27 +35,23 @@ public class Differ {
             Map<String, Object> item = new HashMap<>();
             item.put("field", key);
 
-            if (!struct1.containsKey(key)) {
+            if (!mapFile1.containsKey(key)) {
                 item.put("type", "added");
-                item.put("value", struct2.get(key));
-            } else if (!struct2.containsKey(key)) {
+                item.put("value", mapFile2.get(key));
+            } else if (!mapFile2.containsKey(key)) {
                 item.put("type", "removed");
-                item.put("value", struct1.get(key));
-            } else if (!Objects.equals(struct1.get(key), struct2.get(key))) {
+                item.put("value", mapFile1.get(key));
+            } else if (!Objects.equals(mapFile1.get(key), mapFile2.get(key))) {
                 item.put("type", "updated");
-                item.put("oldValue", struct1.get(key));
-                item.put("newValue", struct2.get(key));
+                item.put("oldValue", mapFile1.get(key));
+                item.put("newValue", mapFile2.get(key));
             } else {
                 item.put("type", "stable");
-                item.put("value", struct1.get(key));
+                item.put("value", mapFile1.get(key));
             }
 
             diff.add(item);
         }
-        return Formatter.format(diff, format);
-    }
-
-    public static String generate(Map<String, Object> struct1, Map<String, Object> struct2) {
-        return generate(struct1, struct2, "stylish");
+        return diff;
     }
 }

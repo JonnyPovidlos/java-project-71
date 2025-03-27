@@ -13,11 +13,7 @@ import java.util.concurrent.Callable;
 public class App implements Callable<Integer> {
     @Override
     public Integer call() throws Exception {
-        var fileExtension1 = filepath1.substring(filepath1.lastIndexOf("."));
-        var fileExtension2 = filepath2.substring(filepath1.lastIndexOf("."));
-        var mapFile1 = Parser.parse(FileUtils.readFile(filepath1), fileExtension1);
-        var mapFile2 = Parser.parse(FileUtils.readFile(filepath2), fileExtension2);
-        var result = Differ.generate(mapFile1, mapFile2, format);
+        var result = Differ.generate(filepath1, filepath2, format);
         System.out.println(result);
         return 0;
     }
