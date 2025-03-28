@@ -13,7 +13,7 @@ public class Formatter {
             case "stylish" -> Stylish.format(diff);
             case "plain" -> Plain.format(diff);
             case "json" -> Json.format(diff);
-            default -> "";
+            default -> throw new IllegalArgumentException("invalid format");
         };
     }
 }

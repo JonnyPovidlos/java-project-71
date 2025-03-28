@@ -10,9 +10,9 @@ public class Parser {
 
     public static Map<String, Object> parse(String content, String fileExtension) throws Exception {
         ObjectMapper mapper;
-        if (fileExtension.endsWith(".json")) {
+        if (fileExtension.endsWith("json")) {
             mapper = new ObjectMapper();
-        } else if (fileExtension.endsWith(".yml") || fileExtension.endsWith(".yaml")) {
+        } else if (fileExtension.endsWith("yml") || fileExtension.endsWith("yaml")) {
             mapper = new YAMLMapper();
         } else {
             throw new IllegalArgumentException("Invalid format file");

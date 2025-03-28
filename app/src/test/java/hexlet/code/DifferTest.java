@@ -13,8 +13,6 @@ public class DifferTest {
     private static String expectedValStylish;
     private static String expectedValPlain;
     private static String expectedValJson;
-    private static String file1;
-    private static String file2;
 
     private static String readFixture(String fileName) throws Exception {
         return FileUtils.readFile(getFixturePath(fileName));
@@ -34,10 +32,13 @@ public class DifferTest {
     @Test
     public void testGenerateFromJson() throws Exception {
 
-        file1 = getFixturePath("file1.json");
-        file2 = getFixturePath("file2.json");
+        var file1 = getFixturePath("file1.json");
+        var file2 = getFixturePath("file2.json");
 
         var actual = Differ.generate(file1, file2);
+        assertEquals(expectedValStylish, actual);
+
+        actual = Differ.generate(file1, file2, "stylish");
         assertEquals(expectedValStylish, actual);
 
         actual = Differ.generate(file1, file2, "plain");
@@ -50,10 +51,13 @@ public class DifferTest {
     @Test
     public void testGenerateFromYml() throws Exception {
 
-        file1 = getFixturePath("file1.yml");
-        file2 = getFixturePath("file2.yml");
+        var file1 = getFixturePath("file1.yml");
+        var file2 = getFixturePath("file2.yml");
 
         var actual = Differ.generate(file1, file2);
+        assertEquals(expectedValStylish, actual);
+
+        actual = Differ.generate(file1, file2, "stylish");
         assertEquals(expectedValStylish, actual);
 
         actual = Differ.generate(file1, file2, "plain");
