@@ -8,11 +8,11 @@ import java.util.Map;
 
 public class Parser {
 
-    public static Map<String, Object> parse(String content, String fileExtension) throws Exception {
+    public static Map<String, Object> parse(String content, String format) throws Exception {
         ObjectMapper mapper;
-        if (fileExtension.endsWith("json")) {
+        if (format.equals("json")) {
             mapper = new ObjectMapper();
-        } else if (fileExtension.endsWith("yml") || fileExtension.endsWith("yaml")) {
+        } else if (format.equals("yml") || format.equals("yaml")) {
             mapper = new YAMLMapper();
         } else {
             throw new IllegalArgumentException("Invalid format file");
